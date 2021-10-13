@@ -1,0 +1,8 @@
+correlate:
+    getaroundr_path: "/home/horungev/Catalogs/SRG/crossmatch/getaroundr.py"
+    log_path: "logs/"
+    radius: 3.0
+    cat: "uhs1v1"
+    iRA: ra
+    iDEC: dec
+    asfx: "_"

@@ -1,0 +1,42 @@
+schema: '2.0'
+stages:
+  сorrelate:
+    cmd: python src/correlate.py data/cv01.fits data/cv02.fits data/cv11.fits data/cv12.fits
+    deps:
+    - path: data/cv01.fits
+      md5: 1ddaddee2d156ff89f8325054353c247
+      size: 9285120
+    - path: data/cv02.fits
+      md5: 5cb3916378c4d9561a95f6fe13e344f2
+      size: 9285120
+    - path: data/cv11.fits
+      md5: 33414b7498481dd33ed1ab69c41be101
+      size: 9328320
+    - path: data/cv12.fits
+      md5: dcc09c8364facb0224d12744b833f2d5
+      size: 9328320
+    - path: src/correlate.py
+      md5: bd01b3e19b81b491f936e9196031a453
+      size: 993
+    params:
+      params.yaml:
+        correlate.asfx: _
+        correlate.cat: uhs1v1
+        correlate.getaroundr_path: /home/horungev/Catalogs/SRG/crossmatch/getaroundr.py
+        correlate.iDEC: dec
+        correlate.iRA: ra
+        correlate.log_path: logs/
+        correlate.radius: 3.0
+    outs:
+    - path: data/j_cv01.fits
+      md5: 412a98d01d1561f73948b086a2e5a310
+      size: 14016960
+    - path: data/j_cv02.fits
+      md5: 06aa84dea21a82e0f70d885e7aa45566
+      size: 14408640
+    - path: data/j_cv11.fits
+      md5: 9576edf1991576a445991ce431b4d031
+      size: 14137920
+    - path: data/j_cv12.fits
+      md5: c9bc620d1017bd1ff89061f14d80df4a
+      size: 14448960

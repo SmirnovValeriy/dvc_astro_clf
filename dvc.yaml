@@ -1,0 +1,22 @@
+stages:
+    сorrelate:
+        cmd: python src/correlate.py data/cv01.fits data/cv02.fits data/cv11.fits data/cv12.fits
+        deps: 
+        - src/correlate.py
+        - data/cv01.fits
+        - data/cv02.fits
+        - data/cv11.fits
+        - data/cv12.fits
+        params:
+        - correlate.getaroundr_path
+        - correlate.log_path
+        - correlate.radius
+        - correlate.cat
+        - correlate.iRA
+        - correlate.iDEC
+        - correlate.asfx
+        outs:
+        - data/j_cv01.fits
+        - data/j_cv02.fits
+        - data/j_cv11.fits
+        - data/j_cv12.fits
