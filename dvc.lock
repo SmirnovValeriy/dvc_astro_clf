@@ -40,3 +40,176 @@ stages:
     - path: data/j_cv12.fits
       md5: c9bc620d1017bd1ff89061f14d80df4a
       size: 14448960
+  merge:
+    cmd: python3 src/merge.py
+    deps:
+    - path: data/cv0.csv
+      md5: a7f5402a8ad4ab64a79567e1684dc34b
+      size: 922590405
+    - path: data/cv1.csv
+      md5: c62a94d18a029c907301239121f34735
+      size: 927530017
+    - path: data/j_cv01.fits
+      md5: 412a98d01d1561f73948b086a2e5a310
+      size: 14016960
+    - path: data/j_cv02.fits
+      md5: 06aa84dea21a82e0f70d885e7aa45566
+      size: 14408640
+    - path: data/j_cv11.fits
+      md5: 9576edf1991576a445991ce431b4d031
+      size: 14137920
+    - path: data/j_cv12.fits
+      md5: c9bc620d1017bd1ff89061f14d80df4a
+      size: 14448960
+    - path: data/sdss.gz_pkl
+      md5: 073d6435312b6a2cec33efe6d467fe19
+      size: 358242055
+    - path: src/merge.py
+      md5: 870a09932984333081e15db1b2867a2f
+      size: 1224
+    outs:
+    - path: data/1cv01.csv
+      md5: b87a97b150e2a9c0ccf0fe1805c6fcd3
+      size: 238384611
+    - path: data/1cv02.csv
+      md5: cfff20bc8ba1da7bd5826577017fe114
+      size: 159509528
+    - path: data/1cv11.csv
+      md5: 5940349d325893b705f64038bec1d2bd
+      size: 240845739
+    - path: data/1cv12.csv
+      md5: 3186e058975631321ef97d4f4891956c
+      size: 161008275
+    - path: data/cv01.csv
+      md5: e3f7bb9b5931c79e3b05c35e7b499b38
+      size: 243563011
+    - path: data/cv02.csv
+      md5: e94d1f1285c4fe0aa2d4423a395cf75a
+      size: 177370097
+    - path: data/cv11.csv
+      md5: a5eb723eb77987a2cb4e6754018d3dfc
+      size: 245796172
+    - path: data/cv12.csv
+      md5: 26be3f9565f4470770c4be9e97b3f73b
+      size: 177955214
+  prepare data:
+    cmd: ls -lh
+  correlate:
+    cmd: python3 src/correlate.py
+    deps:
+    - path: /home/horungev/Catalogs/SRG/crossmatch/getaroundr.py
+      md5: 3d239ffd747cc387f39c34005f4fd7e1
+      size: 15661
+    - path: data/cv01.fits
+      md5: 1ddaddee2d156ff89f8325054353c247
+      size: 9285120
+    - path: data/cv02.fits
+      md5: 5cb3916378c4d9561a95f6fe13e344f2
+      size: 9285120
+    - path: data/cv11.fits
+      md5: 33414b7498481dd33ed1ab69c41be101
+      size: 9328320
+    - path: data/cv12.fits
+      md5: dcc09c8364facb0224d12744b833f2d5
+      size: 9328320
+    - path: src/correlate.py
+      md5: 832f7330f38d58141eb55a554d4f7e16
+      size: 1068
+    params:
+      params.yaml:
+        common.log_path: logs/
+        correlate.asfx: _
+        correlate.cat: uhs1v1
+        correlate.getaroundr_path: /home/horungev/Catalogs/SRG/crossmatch/getaroundr.py
+        correlate.iDEC: dec
+        correlate.iRA: ra
+        correlate.radius: 3.0
+    outs:
+    - path: data/j_cv01.fits
+      md5: 412a98d01d1561f73948b086a2e5a310
+      size: 14016960
+    - path: data/j_cv02.fits
+      md5: 06aa84dea21a82e0f70d885e7aa45566
+      size: 14408640
+    - path: data/j_cv11.fits
+      md5: 9576edf1991576a445991ce431b4d031
+      size: 14137920
+    - path: data/j_cv12.fits
+      md5: c9bc620d1017bd1ff89061f14d80df4a
+      size: 14448960
+  featurize:
+    cmd: python3 src/featurize.py data/features.pkl data/df_featurize.csv
+    deps:
+    - path: data/1cv01.csv
+      md5: b87a97b150e2a9c0ccf0fe1805c6fcd3
+      size: 238384611
+    - path: data/1cv02.csv
+      md5: cfff20bc8ba1da7bd5826577017fe114
+      size: 159509528
+    - path: data/1cv11.csv
+      md5: 5940349d325893b705f64038bec1d2bd
+      size: 240845739
+    - path: data/1cv12.csv
+      md5: 3186e058975631321ef97d4f4891956c
+      size: 161008275
+    - path: data/features.pkl
+      md5: c67a1bafd36ac74489e0afb72ee09db4
+      size: 1716
+    - path: src/featurize.py
+      md5: 512c6390527856ca2fdcefa0ba274707
+      size: 4643
+    params:
+      params.yaml:
+        featurize.column: JAPERMAG3
+        featurize.mode: j
+        featurize.overview: sdssdr16+wise_decals8tr
+    outs:
+    - path: data/df_featurize.csv
+      md5: 0a54202e0cf734956fec44be0bfa82e0
+      size: 357659215
+  train:
+    cmd: python3 src/train.py data/df_featurize.csv data/df_train.pkl data/df_test.pkl
+      models/model.pkl models/robust.pkl
+    deps:
+    - path: data/df_featurize.csv
+      md5: 0a54202e0cf734956fec44be0bfa82e0
+      size: 357659215
+    - path: src/train.py
+      md5: b4627058f4e9aa024e0c1f4ee2189b31
+      size: 2999
+    - path: src/train_lib.py
+      md5: 08f9532f9e9f046ad141068d7e51715d
+      size: 6268
+    outs:
+    - path: data/df_test.pkl
+      md5: 6e99a18d94c1e8a31ef568e425880bd0
+      size: 38423748
+    - path: data/df_train.pkl
+      md5: 64d784da8e61b2bd572e4641bc1336a9
+      size: 45921828
+    - path: models/model.pkl
+      md5: 639876503158370cba8b696a70b973cf
+      size: 2556481
+    - path: models/robust.pkl
+      md5: 89122b50ad8d0c515203fa2a5f810369
+      size: 1086
+  validate:
+    cmd: python3 src/validate.py models/model.pkl models/robust.pkl data/df_test.pkl
+      scores.json
+    deps:
+    - path: data/df_test.pkl
+      md5: 6e99a18d94c1e8a31ef568e425880bd0
+      size: 38423748
+    - path: models/model.pkl
+      md5: 639876503158370cba8b696a70b973cf
+      size: 2556481
+    - path: models/robust.pkl
+      md5: 89122b50ad8d0c515203fa2a5f810369
+      size: 1086
+    - path: src/validate.py
+      md5: a86ee2cdd5b4961796f91553329bfcfb
+      size: 760
+    outs:
+    - path: scores.json
+      md5: 16447462a817d7e53d51d0940fba1f94
+      size: 38
