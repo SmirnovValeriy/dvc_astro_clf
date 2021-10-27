@@ -161,19 +161,19 @@ stages:
     params:
       params.yaml:
         featurize.column: JAPERMAG3
-        featurize.mode: j
-        featurize.overview: sdssdr16+wise_decals8tr
+        featurize.mode: not_j
+        featurize.overview: sdssdr16+psdr2+all_decals8tr
     outs:
     - path: data/df_featurize.csv
-      md5: 0a54202e0cf734956fec44be0bfa82e0
-      size: 357659215
+      md5: f4c0aa230d81211b92e40d298478bb5f
+      size: 572712967
   train:
     cmd: python3 src/train.py data/df_featurize.csv data/df_train.pkl data/df_test.pkl
       models/model.pkl models/robust.pkl
     deps:
     - path: data/df_featurize.csv
-      md5: 0a54202e0cf734956fec44be0bfa82e0
-      size: 357659215
+      md5: f4c0aa230d81211b92e40d298478bb5f
+      size: 572712967
     - path: src/train.py
       md5: b4627058f4e9aa024e0c1f4ee2189b31
       size: 2999
@@ -182,34 +182,34 @@ stages:
       size: 6268
     outs:
     - path: data/df_test.pkl
-      md5: 6e99a18d94c1e8a31ef568e425880bd0
-      size: 38423748
+      md5: 1ec17f39584aeb5e6a92ba533e6b6fc0
+      size: 61852748
     - path: data/df_train.pkl
-      md5: 64d784da8e61b2bd572e4641bc1336a9
-      size: 45921828
+      md5: e141c3164e5f6795b602a54f28355aad
+      size: 73922828
     - path: models/model.pkl
-      md5: 639876503158370cba8b696a70b973cf
-      size: 2556481
+      md5: 9cca282ef93cc0157e88812035169611
+      size: 1788160
     - path: models/robust.pkl
-      md5: 89122b50ad8d0c515203fa2a5f810369
-      size: 1086
+      md5: 11ff8bac6178eb3330342ee468065d1f
+      size: 1486
   validate:
     cmd: python3 src/validate.py models/model.pkl models/robust.pkl data/df_test.pkl
       scores.json
     deps:
     - path: data/df_test.pkl
-      md5: 6e99a18d94c1e8a31ef568e425880bd0
-      size: 38423748
+      md5: 1ec17f39584aeb5e6a92ba533e6b6fc0
+      size: 61852748
     - path: models/model.pkl
-      md5: 639876503158370cba8b696a70b973cf
-      size: 2556481
+      md5: 9cca282ef93cc0157e88812035169611
+      size: 1788160
     - path: models/robust.pkl
-      md5: 89122b50ad8d0c515203fa2a5f810369
-      size: 1086
+      md5: 11ff8bac6178eb3330342ee468065d1f
+      size: 1486
     - path: src/validate.py
       md5: a86ee2cdd5b4961796f91553329bfcfb
       size: 760
     outs:
     - path: scores.json
-      md5: 16447462a817d7e53d51d0940fba1f94
+      md5: fb832dd996ac975c1ecd155a412170a6
       size: 38
