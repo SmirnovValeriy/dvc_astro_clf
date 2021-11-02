@@ -1,0 +1,17 @@
+name: dvc_astro
+on: [push]
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: iterative/setup-dvc@v1
+      - uses: iterative/setup-cml@v1
+      - name: cml_run
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GOOGLE_DRIVE_STORAGE }}
+        run: |
+          dvc pull
+          echo "dvc pull completed sucessfully" >> report.md
+          cml-send-comment report.md
