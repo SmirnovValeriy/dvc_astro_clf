@@ -3,14 +3,13 @@ stages:
         cmd: python3 src/correlate.py
         deps:
         - src/correlate.py
-        - /home/horungev/Catalogs/SRG/crossmatch/getaroundr.py
-        - data/cv01.fits
-        - data/cv02.fits
-        - data/cv11.fits
-        - data/cv12.fits
+        - src/getaroundr.py
+        - input/cv01.fits
+        - input/cv02.fits
+        - input/cv11.fits
+        - input/cv12.fits
         params:
         - common.log_path
-        - correlate.getaroundr_path
         - correlate.radius
         - correlate.cat
         - correlate.iRA
@@ -29,9 +28,9 @@ stages:
         - data/j_cv02.fits
         - data/j_cv11.fits
         - data/j_cv12.fits
-        - data/cv0.csv
-        - data/cv1.csv
-        - data/sdss.gz_pkl
+        - input/cv0.csv
+        - input/cv1.csv
+        - input/sdss.gz_pkl
         outs:
         - data/cv01.csv
         - data/cv02.csv
@@ -42,14 +41,14 @@ stages:
         - data/1cv11.csv
         - data/1cv12.csv
     featurize:
-        cmd: python3 src/featurize.py data/features.pkl data/df_featurize.csv
+        cmd: python3 src/featurize.py input/features.pkl data/df_featurize.csv
         params:
         - featurize.column
         - featurize.mode
         - featurize.overview
         deps:
         - src/featurize.py
-        - data/features.pkl
+        - input/features.pkl
         - data/1cv01.csv
         - data/1cv02.csv
         - data/1cv11.csv
@@ -58,6 +57,8 @@ stages:
         - data/df_featurize.csv
     train:
         cmd: python3 src/train.py data/df_featurize.csv data/df_train.pkl data/df_test.pkl models/model.pkl models/robust.pkl
+        params:
+        - common.log_path
         deps:
         - src/train.py
         - src/train_lib.py

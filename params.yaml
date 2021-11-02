@@ -2,7 +2,6 @@ common:
     log_path: logs/
 
 correlate:
-    getaroundr_path: /home/horungev/Catalogs/SRG/crossmatch/getaroundr.py
     radius: 3.0
     cat: uhs1v1
     iRA: ra

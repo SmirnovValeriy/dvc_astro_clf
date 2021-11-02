@@ -1,0 +1,4 @@
+outs:
+- md5: 073d6435312b6a2cec33efe6d467fe19
+  size: 358242055
+  path: sdss.gz_pkl

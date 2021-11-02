@@ -3,9 +3,9 @@ from astropy.table import Table
 
 
 df_base = {}
-df_base['0'] = pd.read_csv('data/cv0.csv')
-df_base['1'] = pd.read_csv('data/cv1.csv')
-df_sdss = pd.read_csv('data/sdss.gz_pkl')
+df_base['0'] = pd.read_csv('input/cv0.csv')
+df_base['1'] = pd.read_csv('input/cv1.csv')
+df_sdss = pd.read_csv('input/sdss.gz_pkl')
 postfixes = ['01', '02', '11', '12']
 
 for postfix in postfixes:

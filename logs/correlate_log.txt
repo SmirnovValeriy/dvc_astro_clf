@@ -1,4 +1,4 @@
-Namespace(NSIDE=2048, asfx=['_'], c=[], cat=['uhs1v1'], full=True, i='data/cv12.fits', iDEC='dec', iRA='ra', iSEPNAME='sep', index='ix', merge=False, mpi=False, o='data/j_cv12.fits', r='3.0')
+Namespace(NSIDE=2048, asfx=['_'], c=[], cat=['uhs1v1'], full=True, i='input/cv12.fits', iDEC='dec', iRA='ra', iSEPNAME='sep', index='ix', merge=False, mpi=False, o='data/j_cv12.fits', r='3.0')
 05361.fits 3477 3476
 16 16 16
 06150.fits 4236 4235
@@ -17447,4 +17447,4 @@ Namespace(NSIDE=2048, asfx=['_'], c=[], cat=['uhs1v1'], full=True, i='data/cv12.
 (388433, 0)
 ('ix_', 'ra_', 'dec_', 'nrow_', 'sep_', 'RA', 'DEC', 'JAPERMAG3', 'JAPERMAG3ERR', 'MERGEDCLASS')
 data/j_cv12.fits saved
-[1.21593475e-05 6.70204710e+02] 670.2047226428986 670.204826593399 Execution time
+[1.14440918e-05 7.18577009e+02] 718.5770201683044 718.5771269798279 Execution time

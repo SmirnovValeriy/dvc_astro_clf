@@ -43,12 +43,6 @@ stages:
   merge:
     cmd: python3 src/merge.py
     deps:
-    - path: data/cv0.csv
-      md5: a7f5402a8ad4ab64a79567e1684dc34b
-      size: 922590405
-    - path: data/cv1.csv
-      md5: c62a94d18a029c907301239121f34735
-      size: 927530017
     - path: data/j_cv01.fits
       md5: 412a98d01d1561f73948b086a2e5a310
       size: 14016960
@@ -61,12 +55,18 @@ stages:
     - path: data/j_cv12.fits
       md5: c9bc620d1017bd1ff89061f14d80df4a
       size: 14448960
-    - path: data/sdss.gz_pkl
+    - path: input/cv0.csv
+      md5: a7f5402a8ad4ab64a79567e1684dc34b
+      size: 922590405
+    - path: input/cv1.csv
+      md5: c62a94d18a029c907301239121f34735
+      size: 927530017
+    - path: input/sdss.gz_pkl
       md5: 073d6435312b6a2cec33efe6d467fe19
       size: 358242055
     - path: src/merge.py
-      md5: 870a09932984333081e15db1b2867a2f
-      size: 1224
+      md5: f1a3c301fc6530785daf930c21f67075
+      size: 1227
     outs:
     - path: data/1cv01.csv
       md5: b87a97b150e2a9c0ccf0fe1805c6fcd3
@@ -97,30 +97,29 @@ stages:
   correlate:
     cmd: python3 src/correlate.py
     deps:
-    - path: /home/horungev/Catalogs/SRG/crossmatch/getaroundr.py
-      md5: 3d239ffd747cc387f39c34005f4fd7e1
-      size: 15661
-    - path: data/cv01.fits
+    - path: input/cv01.fits
       md5: 1ddaddee2d156ff89f8325054353c247
       size: 9285120
-    - path: data/cv02.fits
+    - path: input/cv02.fits
       md5: 5cb3916378c4d9561a95f6fe13e344f2
       size: 9285120
-    - path: data/cv11.fits
+    - path: input/cv11.fits
       md5: 33414b7498481dd33ed1ab69c41be101
       size: 9328320
-    - path: data/cv12.fits
+    - path: input/cv12.fits
       md5: dcc09c8364facb0224d12744b833f2d5
       size: 9328320
     - path: src/correlate.py
-      md5: 832f7330f38d58141eb55a554d4f7e16
-      size: 1068
+      md5: 3bc4a292d6d705d98977ab9c9246bfa0
+      size: 1064
+    - path: src/getaroundr.py
+      md5: 3d239ffd747cc387f39c34005f4fd7e1
+      size: 15661
     params:
       params.yaml:
         common.log_path: logs/
         correlate.asfx: _
         correlate.cat: uhs1v1
-        correlate.getaroundr_path: /home/horungev/Catalogs/SRG/crossmatch/getaroundr.py
         correlate.iDEC: dec
         correlate.iRA: ra
         correlate.radius: 3.0
@@ -138,7 +137,7 @@ stages:
       md5: c9bc620d1017bd1ff89061f14d80df4a
       size: 14448960
   featurize:
-    cmd: python3 src/featurize.py data/features.pkl data/df_featurize.csv
+    cmd: python3 src/featurize.py input/features.pkl data/df_featurize.csv
     deps:
     - path: data/1cv01.csv
       md5: b87a97b150e2a9c0ccf0fe1805c6fcd3
@@ -152,7 +151,7 @@ stages:
     - path: data/1cv12.csv
       md5: 3186e058975631321ef97d4f4891956c
       size: 161008275
-    - path: data/features.pkl
+    - path: input/features.pkl
       md5: c67a1bafd36ac74489e0afb72ee09db4
       size: 1716
     - path: src/featurize.py
@@ -180,16 +179,19 @@ stages:
     - path: src/train_lib.py
       md5: 08f9532f9e9f046ad141068d7e51715d
       size: 6268
+    params:
+      params.yaml:
+        common.log_path: logs/
     outs:
     - path: data/df_test.pkl
-      md5: 1ec17f39584aeb5e6a92ba533e6b6fc0
+      md5: c2e5e585609116dec76fb20500c2dc3d
       size: 61852748
     - path: data/df_train.pkl
-      md5: e141c3164e5f6795b602a54f28355aad
+      md5: 76af01dfc7dee7429fc28cd4eacffa55
       size: 73922828
     - path: models/model.pkl
-      md5: 9cca282ef93cc0157e88812035169611
-      size: 1788160
+      md5: 3713e9c1c68ae0c07b862a3fa99bdf1f
+      size: 1783317
     - path: models/robust.pkl
       md5: 11ff8bac6178eb3330342ee468065d1f
       size: 1486
@@ -198,11 +200,11 @@ stages:
       scores.json
     deps:
     - path: data/df_test.pkl
-      md5: 1ec17f39584aeb5e6a92ba533e6b6fc0
+      md5: c2e5e585609116dec76fb20500c2dc3d
       size: 61852748
     - path: models/model.pkl
-      md5: 9cca282ef93cc0157e88812035169611
-      size: 1788160
+      md5: 3713e9c1c68ae0c07b862a3fa99bdf1f
+      size: 1783317
     - path: models/robust.pkl
       md5: 11ff8bac6178eb3330342ee468065d1f
       size: 1486
@@ -211,5 +213,5 @@ stages:
       size: 760
     outs:
     - path: scores.json
-      md5: fb832dd996ac975c1ecd155a412170a6
+      md5: fd03f5eba0c0ff3eace34f689590bc96
       size: 38
