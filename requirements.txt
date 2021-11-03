@@ -1,0 +1,11 @@
+numpy
+pandas
+pickle-mixin
+joblib
+hyperopt
+lightgbm
+sklearn
+pyyaml
+astropy
+healpy
+fitsio

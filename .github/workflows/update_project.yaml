@@ -12,8 +12,11 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GOOGLE_DRIVE_STORAGE }}
         run: |
+          pip install -r requirements.txt
           dvc pull
           echo "dvc pull completed sucessfully" > report.md
           dvc repro >> report.md
           echo "dvc repro completed sucessfully" >> report.md
+          dvc metrics show -A >> report.md
           cml-send-comment report.md
+

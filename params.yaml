@@ -10,5 +10,5 @@ correlate:
 
 featurize:
     column: JAPERMAG3
-    mode: not_j
-    overview: sdssdr16+psdr2+all_decals8tr
+    mode: j
+    overview: sdssdr16+psdr2+wise_decals8tr
