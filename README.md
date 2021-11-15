@@ -37,13 +37,13 @@ run: |
 Для автоматизации аутентификации необходимо указать реквизиты — содержание файла **[.dvc/tmp/gdrive-user-credentials.json](.dvc/tmp/gdrive-user-credentials.json)**, автоматически сформированного при первом доступе к хранилищу, в т. н. Secrets репозитория (Settings -> Secrets), а затем добавить этот Secret в настройки тестового окружения:
 ```
 env: 
-	GDRIVE_CREDENTIALS_DATA: ${{ secrets.GOOGLE_DRIVE_STORAGE }}
+  GDRIVE_CREDENTIALS_DATA: ${{ secrets.GOOGLE_DRIVE_STORAGE }}
 ```
 CML же позволяет формировать и публиковать результаты отчета (например, в виде Markdown файла) как комментарий к соответствующему коммиту.
 Чтобы без дополнительной установки использовать DVC и CML в тестовом пространстве необходимо указать это в настройках тестового пространства:
 ```
 steps:
-	- uses: actions/checkout@v2
-	- uses: iterative/setup-dvc@v1
-	- uses: iterative/setup-cml@v1
+  - uses: actions/checkout@v2
+  - uses: iterative/setup-dvc@v1
+  - uses: iterative/setup-cml@v1
 ```
